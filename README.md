@@ -63,3 +63,4 @@ PawPal+ relies on an intelligent, object-oriented scheduling backbone:
 * **Persistent Memory:** Utilizes Streamlit's `session_state` to retain Owner, Pet, and Task objects cleanly between browser interactions.
 
 ## 📸 Demo
+<a href="pawpal_screenshot.png" target="_blank"><img src='pawpal_screenshot.png' title='PawPal App' width='600' alt='PawPal App' /></a>
