@@ -7,11 +7,22 @@
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+My initial design followed an object-oriented approach centered around four main classes to separate the data from the scheduling logic:
+
+Task: Responsible for holding the details of a single care activity. It tracks attributes like description, duration_minutes, priority, time, and a boolean is_complete status.
+
+Pet: Represents the animal receiving care. It stores basic info (name, species) and is responsible for maintaining a list of its assigned Task objects.
+
+Owner: Acts as the top-level user entity. It stores the owner's name and maintains a list of Pet objects, representing a "has-a" composition relationship.
+
+Scheduler: Functions as the algorithmic "brain" of the app. Instead of holding data, it is responsible for processing it—specifically pulling tasks from the owner's pets, sorting them by priority/time, and checking for schedule conflicts to generate a daily plan.
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
+Yes, the design required adjustments once I started implementing the Scheduler logic. Initially, I designed the Task class to store the time attribute as a simple string (e.g., "08:00 AM"). However, when implementing the check_conflicts and sort_tasks methods, I realized that calculating overlapping durations and sorting string-based times was highly inefficient and prone to bugs. I updated the Task class to utilize Python's built-in datetime.time objects instead of strings, and added an end_time property that calculates automatically based on the duration_minutes. This change allowed the Scheduler to use simple math (e.g., task1.end_time > task2.start_time) to detect conflicts accurately.
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
