@@ -47,3 +47,10 @@ PawPal+ features an intelligent algorithmic layer to optimize your day:
 * **Chronological Sorting:** Automatically sorts tasks by "HH:MM AM/PM" format using Python `lambda` keys.
 * **Conflict Warnings:** Detects and flags double-booked tasks scheduled at the exact same time.
 * **Daily Recurrence:** Automatically generates tomorrow's task when a "Daily" or "Weekly" task is marked complete.
+
+## 🧪 Testing PawPal+
+To ensure the reliability of the scheduling algorithms, PawPal+ includes an automated test suite built with `pytest`. 
+
+**To run the tests:**
+```bash
+python -m pytest
