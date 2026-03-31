@@ -54,3 +54,12 @@ To ensure the reliability of the scheduling algorithms, PawPal+ includes an auto
 **To run the tests:**
 ```bash
 python -m pytest
+
+## ✨ Core Features
+PawPal+ relies on an intelligent, object-oriented scheduling backbone:
+* **Smart Time Sorting:** Automatically parses "HH:MM AM/PM" strings and sorts all tasks chronologically across all pets.
+* **Conflict Detection:** Identifies double-bookings and alerts the user with dynamic UI warnings.
+* **Recurring Tasks:** Marking a "Daily" or "Weekly" task as complete seamlessly generates the next occurrence using `datetime` timedelta math.
+* **Persistent Memory:** Utilizes Streamlit's `session_state` to retain Owner, Pet, and Task objects cleanly between browser interactions.
+
+## 📸 Demo

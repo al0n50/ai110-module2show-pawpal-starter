@@ -96,8 +96,35 @@ st.subheader("Build Schedule")
 st.caption("Click below to run your backend algorithms and generate the daily plan.")
 
 if st.button("Generate schedule"):
-    # Step 3c: Wiring UI to Logic (Running the Scheduler)
-    plan_output = st.session_state.scheduler.get_daily_plan(st.session_state.owner)
+    all_tasks = st.session_state.scheduler.get_all_tasks(st.session_state.owner)
     
-    # Render the output inside a code block to preserve your terminal formatting
-    st.code(plan_output, language="text")
+    if not all_tasks:
+        st.info("No tasks scheduled for today. Add some above!")
+    else:
+        # 1. Detect and display conflicts using Streamlit warnings
+        warnings = st.session_state.scheduler.check_conflicts(all_tasks)
+        if warnings:
+            for warning in warnings:
+                st.warning(warning, icon="⚠️")
+        else:
+            st.success("Looking good! No scheduling conflicts detected.", icon="✅")
+            
+        # 2. Sort tasks chronologically
+        sorted_tasks = st.session_state.scheduler.sort_tasks_by_time(all_tasks)
+        
+        # 3. Format the output into a clean list of dictionaries for st.table
+        st.markdown("### 📅 Today's Schedule")
+        schedule_data = []
+        for pet_name, task in sorted_tasks:
+            status = "✅ Done" if task.is_complete else "⏳ Pending"
+            schedule_data.append({
+                "Time": task.time,
+                "Pet": pet_name,
+                "Task": task.description,
+                "Duration (min)": task.duration_minutes,
+                "Priority": task.priority,
+                "Status": status
+            })
+        
+        # Render a professional data table!
+        st.table(schedule_data)
