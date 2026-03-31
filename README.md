@@ -41,3 +41,9 @@ pip install -r requirements.txt
 5. Add tests to verify key behaviors.
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
+
+## 🧠 Smarter Scheduling
+PawPal+ features an intelligent algorithmic layer to optimize your day:
+* **Chronological Sorting:** Automatically sorts tasks by "HH:MM AM/PM" format using Python `lambda` keys.
+* **Conflict Warnings:** Detects and flags double-booked tasks scheduled at the exact same time.
+* **Daily Recurrence:** Automatically generates tomorrow's task when a "Daily" or "Weekly" task is marked complete.

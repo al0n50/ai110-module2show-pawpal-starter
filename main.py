@@ -1,32 +1,30 @@
 from pawpal_system import Owner, Pet, Task, Scheduler
 
 def main():
-    # 1. Create an Owner
     owner = Owner(name="Alonso")
-
-    # 2. Create at least two Pets
     pet1 = Pet(name="Buddy", species="Dog")
     pet2 = Pet(name="Luna", species="Cat")
     owner.add_pet(pet1)
     owner.add_pet(pet2)
 
-    # 3. Add at least three Tasks with different times
-    task1 = Task(description="Morning Walk", duration_minutes=30, priority="High", time="07:30 AM", frequency="Daily")
-    task2 = Task(description="Feed Breakfast", duration_minutes=5, priority="High", time="08:00 AM", frequency="Daily")
-    task3 = Task(description="Play with Laser Pointer", duration_minutes=15, priority="Medium", time="06:00 PM")
+    # Adding tasks out of order to test sorting, and at the same time to test conflicts
+    task1 = Task(description="Evening Walk", duration_minutes=30, priority="High", time="06:00 PM")
+    task2 = Task(description="Morning Feed", duration_minutes=5, priority="High", time="08:00 AM", frequency="Daily")
+    task3 = Task(description="Brush Fur", duration_minutes=15, priority="Medium", time="08:00 AM") # Conflict!
 
     pet1.add_task(task1)
     pet1.add_task(task2)
     pet2.add_task(task3)
 
-    # Mark a task complete just to see the status update
-    task1.mark_complete()
+    # Test Recurrence logic
+    new_recurring_task = task2.mark_complete()
+    if new_recurring_task:
+        pet1.add_task(new_recurring_task)
+        print(f"\n🔄 Daily task completed. Next occurrence scheduled for: {new_recurring_task.task_date}")
 
-    # 4. Print "Today's Schedule" to the terminal
+    # Generate Schedule
     scheduler = Scheduler()
-    schedule_output = scheduler.get_daily_plan(owner)
-    
-    print(schedule_output)
+    print(scheduler.get_daily_plan(owner))
 
 if __name__ == "__main__":
     main()

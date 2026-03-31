@@ -37,6 +37,7 @@ Yes, the design required adjustments once I started implementing the Scheduler l
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+For conflict detection, I implemented an exact-match time check rather than calculating overlapping durations. While checking for overlapping durations (e.g., a 30-min task at 8:00 overlapping with a 5-min task at 8:15) is more realistic, simply checking for duplicate start times is significantly lighter on performance and easier to read. For a basic pet app, alerting the user to exact double-bookings is a sufficient "lightweight" warning.
 ---
 
 ## 3. AI Collaboration
